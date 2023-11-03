@@ -26,8 +26,61 @@ typescript コンパイラ(tsc)で、typescript コードを javascript コー�
       5. typescript の型補完が有効になるように設定
          1. 作業内容は[こちらのコミット](https://github.com/g-ishi/chrome-extension-boillerplate/commit/4fd061ea66d71ba04b29952f9bf0319f4f4449c7)を参照
 4. 本番用の Webpack 設定ファイルと、開発用の Webpack 設定ファイルを分離する
+
    - `webpack-merge`ライブラリを使って`webpack.prod.js`と`webpack.dev.js`ファイルを用意し、`webpack.common.js`を継承し、必要な設定値のみを上書きするようにする
    - 作業内容は[こちらのコミット](https://github.com/g-ishi/chrome-extension-boillerplate/commit/3df7104ad6beb830f75b2f2ec9bd9209d8976388)を参照
+
+5. GraphQL の設定(Hasura との接続)
+
+6. 必要なライブラリ群をインストール
+
+```sh
+npm i --save-dev @apollo/client graphql @apollo/react-hooks cross-fetch @graphql-codegen/cli @graphql-codegen/typescript
+```
+
+2. codegen の設定ファイルの初期化
+
+```sh
+npx graphql-codegen init
+
+    Welcome to GraphQL Code Generator!
+    Answer few questions and we will setup everything for you.
+
+? What type of application are you building? Application built with React
+? Where is your schema?: (path or url) https://epic-perch-14.hasura.app/v1/graphql
+? Where are your operations and fragments?: src/queries/**/*.ts
+? Where to write the output: src/gql/
+? Do you want to generate an introspection file? No
+? How to name the config file? codegen.ts
+? What script in package.json should run the codegen? codegen
+Fetching latest versions of selected plugins...
+
+    Config file generated at codegen.ts
+
+      $ npm install
+
+    To install the plugins.
+
+      $ npm run codegen
+
+    To run GraphQL Code Generator.
+```
+
+schema の URL は Hasura の管理画面のここ。
+
+![image-1](./docs/images/graph-ql-endpoint.png)
+
+`Where are your operations and fragments?`は query ファイルの置き場所を指定する。
+
+3. query の定義
+
+送りたいリクエストを Hasura の GraphQL コンソールから作成して、それを query としてコピーして query として定義する。
+
+query 定義後、以下のコマンドで gql 関連のファイルが指定した output フォルダに自動生成される。
+
+```sh
+npm run codegen
+```
 
 ### memo
 

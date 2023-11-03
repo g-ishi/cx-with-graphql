@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Boilerplate Extension",
-  "description": "Chrome Extension boilerplate in react and typescript",
+  "name": "Extension with GraphQL",
+  "description": "Chrome Extension boilerplate in react and typescript with GraphQL",
   "version": "1.0.0",
   "icons": {
     "16": "icon.png",
